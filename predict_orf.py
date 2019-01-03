@@ -12,7 +12,8 @@ def orf(sequnce, table, min_pro_len, max_pro_len):
         for frame in range(3):
             for pro in nuc[frame:].translate(table).split("*"):
                 if max_pro_len >= len(pro) >= min_pro_len:
-                    print("%s,length_%i,strand_%i,frame_%i" % (pro[:], len(pro), strand, frame))
+                    print(">length_%i\n%s" % (len(pro), pro[:]))
+                    #print("%s,length_%i,strand_%i,frame_%i" % (pro[:], len(pro), strand, frame))
 
 seqs = {}
 fr = open("Assembly.scaftig") ## input scaftig file
