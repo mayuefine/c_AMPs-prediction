@@ -16,3 +16,5 @@ list to do next:
 a. need a script to re-format relust file by blastp predition AMPs with already known AMPs, to remove redundancy sequence data.
 
 b. a script to calculate the relative abundence of specific AMP in whole metagenome.
+
+![image](http://github.com/mayuefine/.jpg)
