@@ -31,7 +31,7 @@ while(defined($a=<I>)){
         }
         my @bb = split /,/, $b;
         my $lb = @bb;
-        my $cha = 200 - $lb;
+        my $cha = 300 - $lb;
         my $j = 0;
         while($j < $cha){
             $b = "0".",".$b;
