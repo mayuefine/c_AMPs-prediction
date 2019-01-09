@@ -33,7 +33,7 @@ for train, test in kfold.split(x_tr, y_tr):
     met = Metric(it, validation_data = (x_tr[test],y_tr[test]))
 
     model = Sequential()
-    model.add(Embedding(21, 128, input_length = 200))
+    model.add(Embedding(21, 128, input_length = 300))
     model.add(Conv1D(nb_filter, filter_length, strides = 1, activation = "relu"))
     model.add(MaxPooling1D(pool_size = 5, strides = 5))
     model.add(Dropout(0.1))
