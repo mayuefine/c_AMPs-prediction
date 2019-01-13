@@ -1,0 +1,62 @@
+-----------------------------------------------------------
+Description of Models
+-----------------------------------------------------------
+ten1000ten-cf-1st.h5 => ten fold cross test 
+performance: ACC: 96.00%
+             Sensitivity: 99.29%
+             Specificity: 77.03%
+             Accuracy: 96.00%
+             MCC: 0.8340
+             auROC: 97.72%
+             ACC_STD: 96.33% (+/- 0.63%)
+
+-----------------------------------------------------------
+
+ten1000ten-cf-2nd.h5 => ten fold cross test second edition
+performance: ACC: 95.80%
+             Sensitivity: 99.18%
+             Specificity: 76.35%
+             Accuracy: 95.80%
+             MCC: 0.8253
+             auROC: 97.55%
+             ACC_STD: 96.52% (+/- 0.75%)
+   
+ -----------------------------------------------------------
+   
+ten1000t2n-cf.h5 => twenty fold cross test
+performance: ACC: 95.79%
+             Sensitivity: 98.35%
+             Specificity: 81.08%
+             Accuracy: 95.79%
+             MCC: 0.8280
+             auROC: 99.43%
+             ACC_STD: 96.37% (+/- 0.67%)
+             Precision: 96.76%
+             tp: 418.0, fp: 14.0, tn: 60.0, fn: 7.0
+             
+-----------------------------------------------------------
+
+ten1000tEn-cf.h5 => ten fold cross test third edition
+performance: ACC: 95.70%
+             Sensitivity: 99.29%
+             Specificity: 75.00%
+             Accuracy: 95.70%
+             MCC: 0.8208
+             auROC: 97.83%
+             ACC_STD: 96.67% (+/- 0.54%)
+             Precision: 95.80%
+             tp: 845.0, fp: 37.0, tn: 111.0, fn: 6.0
+
+-----------------------------------------------------------
+
+ten1000t3n-cf.h5 => thirty fold cross test
+performance: ACC: 96.69%
+             Sensitivity: 99.65%
+             Specificity: 79.59%
+             Accuracy: 96.69%
+             MCC: 0.8634
+             auROC: 94.68%
+             ACC_STD: 96.71% (+/- 0.88%)
+             Precision: 96.58%
+             tp: 282.0, fp: 10.0, tn: 39.0, fn: 1.0
+-----------------------------------------------------------
