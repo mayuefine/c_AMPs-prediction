@@ -1,7 +1,7 @@
 -----------------------------------------------------------
 Description of Models
 -----------------------------------------------------------
-ten1000ten-cf-1st.h5 => ten fold cross test 
+ten1000ten-cf-1st.h5 => 10-fold cross validation
 performance: ACC: 96.00%
              Sensitivity: 99.29%
              Specificity: 77.03%
@@ -12,7 +12,7 @@ performance: ACC: 96.00%
 
 -----------------------------------------------------------
 
-ten1000ten-cf-2nd.h5 => ten fold cross test second edition
+ten1000ten-cf-2nd.h5 => 10-fold cross validation second edition
 performance: ACC: 95.80%
              Sensitivity: 99.18%
              Specificity: 76.35%
@@ -23,7 +23,7 @@ performance: ACC: 95.80%
    
  -----------------------------------------------------------
    
-ten1000t2n-cf.h5 => twenty fold cross test
+ten1000t2n-cf.h5 => 20-fold cross validation
 performance: ACC: 95.79%
              Sensitivity: 98.35%
              Specificity: 81.08%
@@ -36,7 +36,7 @@ performance: ACC: 95.79%
              
 -----------------------------------------------------------
 
-ten1000tEn-cf.h5 => ten fold cross test third edition, this edition contain Precision
+ten1000tEn-cf.h5 => 10-fold cross validation third edition, this edition contain Precision
 performance: ACC: 95.70%
              Sensitivity: 99.29%
              Specificity: 75.00%
@@ -49,7 +49,7 @@ performance: ACC: 95.70%
 
 -----------------------------------------------------------
 
-ten1000t3n-cf.h5 => thirty fold cross test
+ten1000t3n-cf.h5 => 30-fold cross validation
 performance: ACC: 96.69%
              Sensitivity: 99.65%
              Specificity: 79.59%
