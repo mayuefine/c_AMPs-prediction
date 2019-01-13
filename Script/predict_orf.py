@@ -8,7 +8,8 @@ from Bio.Seq import Seq
 def orf(sequnce, table, min_pro_len, max_pro_len, scaftig_sequence_name):
     seq = Seq(sequnce)
     number = 1
-    for strand, nuc in [(+1, seq),  (-1, seq.reverse_complement())]:
+    for nuc in [seq, seq.reverse_complement()]:
+    #for strand, nuc in [(+1, seq), (-1, seq.reverse_complement())]:
         for frame in range(3):
             for pro in nuc[frame:].translate(table).split("*"):
                 if max_pro_len >= len(pro) >= min_pro_len:
