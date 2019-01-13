@@ -36,7 +36,7 @@ performance: ACC: 95.79%
              
 -----------------------------------------------------------
 
-ten1000tEn-cf.h5 => ten fold cross test third edition
+ten1000tEn-cf.h5 => ten fold cross test third edition, this edition contain Precision
 performance: ACC: 95.70%
              Sensitivity: 99.29%
              Specificity: 75.00%
