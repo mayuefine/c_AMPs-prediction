@@ -1,22 +1,23 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
 
-from re import match
+#### usage : python3 translation.py > prediction_sequences.fa.txt
+
 from Bio.Seq import Seq
 
-def orf(sequnce, table, min_pro_len, max_pro_len):
+def orf(sequnce, table, min_pro_len, max_pro_len, scaftig_sequence_name):
     seq = Seq(sequnce)
-    #rs = s[::-1]
-    #r_seq = Seq(rs) #(2, seq.complement()), (-1, r_seq),
-    for strand, nuc in [(+1, seq),  (-2  , seq.reverse_complement())]:
+    number = 1
+    for strand, nuc in [(+1, seq),  (-2, seq.reverse_complement())]:
         for frame in range(3):
             for pro in nuc[frame:].translate(table).split("*"):
                 if max_pro_len >= len(pro) >= min_pro_len:
-                    print(">length_%i\n%s" % (len(pro), pro[:]))
+                    print(">prediction_%s_%i\n%s" % (scaftig_sequence_name.replace('>',''), number, pro[:]))
+                    number = number + 1
                     #print("%s,length_%i,strand_%i,frame_%i" % (pro[:], len(pro), strand, frame))
 
 seqs = {}
-fr = open("Assembly.scaftig") ## input scaftig file
+fr = open("AAssembly.scaftig")
 for line in fr:
     if line.startswith('>'):
         name=line.split()[0]
@@ -25,7 +26,5 @@ for line in fr:
         seqs[name]+=line.strip('\n')
 fr.close()
 
-wcsv = open('none.csv', 'w') # need remove at last
 for i in seqs.keys():
-    wcsv.write(str(orf(seqs[i], 1, 5, 100)))
-wcsv.close()
+    str(orf(seqs[i], 1, 5, 100, i))
