@@ -1,8 +1,11 @@
 #!/usr/bin/perl -w
 use strict;
 
-#### usage: perl format.pl AMP.te.fa 1 > amp.txt
-#### 1 means true lable, 0 means false lable
+=pod
+Usage: perl format.pl AMP.te.fa 1 > amp.txt
+Here, 1 means true lable, 0 means false lable, using for 
+predicted file re-format shuold silence this function
+=cut
 
 my $in = $ARGV[0];
 my $in1 = $ARGV[1];
