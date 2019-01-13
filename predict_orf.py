@@ -25,7 +25,7 @@ for line in fr:
         seqs[name]+=line.strip('\n')
 fr.close()
 
-wcsv = open('none.csv', 'w') # need move at last
+wcsv = open('none.csv', 'w') # need remove at last
 for i in seqs.keys():
     wcsv.write(str(orf(seqs[i], 1, 5, 100)))
 wcsv.close()
