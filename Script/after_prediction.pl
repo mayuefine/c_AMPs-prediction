@@ -1,9 +1,13 @@
 #!/usr/bin/perl -w
 use strict;
 
-#### usage perl after_prediction.pl af_pr_te.txt pr_test.txt > predicted.fa.txt
+=pod
+Usage perl after_prediction.pl af_pr_te.txt pr_test.txt > predicted.fa.txt
+af_pr_te.txt is the file created by predicted.py
+pr_test.txt is the file created by translation.py
+=cut
 
-my $in = $ARGV[0]; # this file contain numbers after perdiction function
+my $in = $ARGV[0]; 
 my $in1 = $ARGV[1]; # this file is the fasta sequence file after ORF_prediction
 open I, "<$in";
 my ($a, @line_number);
