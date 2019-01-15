@@ -9,7 +9,6 @@ file re-format shuold silence this function
 =cut
 
 my $in = $ARGV[0];
-#my $in1 = $ARGV[1];
 my %aacode =
     (
     A => "1", C => "2", D => "3", E => "4",
