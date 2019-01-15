@@ -61,6 +61,7 @@ SENS = frp[0][1]
 spec = tn/(tn+fp)
 mcc = ((tp*tn)-(fn*fp))/(((tp+fn)*(tn+fp)*(tp+fp)*(tn+fn))**0.5)
 roc = frp[0][7]
+Precision = tp/(tp+fp)
 
 print("ACC: %.2f%%"%(acc*100))
 print("Sensitivity: %.2f%%"%(SENS*100))
@@ -69,4 +70,5 @@ print("Accuracy: %.2f%%"%(scores[1]*100))
 print("MCC: %.4f"%(mcc))
 print("auROC: %.2f%%"%(roc*100))
 print("ACC_STD: %.2f%% (+/- %.2f%%)" % (mean(cvscores), std(cvscores)))
+print("Precision: %.2f%%"%(Precision*100))
 model.save("test10cf.h5")
