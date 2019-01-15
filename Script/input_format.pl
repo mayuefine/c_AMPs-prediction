@@ -2,13 +2,14 @@
 use strict;
 
 =pod
-Usage: perl format.pl AMP.te.fa 1 > amp.txt
-Here, 1 means true lable, 0 means false lable, using for 
-predicted file re-format shuold silence this function
+Usage: perl format.pl AMP.te.fa P > amp.txt
+Here, P means positive true lable, N means negative false lable, and 
+none means do not need using this function, using for predicted 
+file re-format shuold silence this function
 =cut
 
 my $in = $ARGV[0];
-my $in1 = $ARGV[1];
+#my $in1 = $ARGV[1];
 my %aacode =
     (
     A => "1", C => "2", D => "3", E => "4",
@@ -40,11 +41,13 @@ while(defined($a=<I>)){
             $b = "0".",".$b;
             $j = $j + 1;
         }
-        if($in1 == 1){
+        if($ARGV[1] eq "P" | $ARGV[1] eq "p"){
             $b = $b.",1";
             print "$b\n";
-        }elsif($in1 == 0){
+        }elsif($ARGV[1] eq "N" | $ARGV[1] eq "n"){
             $b = $b.",0";
+            print "$b\n";
+        }elsif($ARGV[1] eq "none"){
             print "$b\n";
         }
     }
