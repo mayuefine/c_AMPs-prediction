@@ -2,28 +2,34 @@
 use strict;
 
 =pod
-Usage: perl after_blast.pl short-test.txt q.fa
+Usage: perl after_blast.pl one_sample_test.txt pred_amp_sequence_2.txt
 The file named short-test.txt was the file produced by blast-v.sh
 and the q.fa is the file created by after_prediction.pl
 =cut
 
-#my $in = "/Users/mayue/Desktop/anti-data/script/short-test.txt";
 my $in = $ARGV[0];
-my ($a, @query);
+my ($a, @query, %delet);
 open (I,"<$in") || die "can`t open the file $in";
-print "query\tdata_base\n";
 while(defined($a=<I>)){
 	chomp($a);
 	my @sp = split /\t/, $a;
-	if($sp[2] >= 97 && $sp[-2] >= 90 && $sp[-1] >= 90){
-		print "$sp[0]\t$sp[1]\n";
-		$sp[0] =~ s/\s//igm;
+	$sp[0] =~ s/\s//igm;
+	if($sp[2] >= 90 and $sp[-1] >= 90){
+		$delet{$sp[0]} = 1;
+	}else{
         push @query, $sp[0];
 	}
 }
 close I;
 
-#my $in1 = "/Users/mayue/Desktop/anti-data/script/q.fa";
+my $i = 0;
+my $len = @query;
+for($i < $len){
+	delete $query[$i] if($delet{$query[$i]} eq 1);
+	$i++;
+}
+undef %delet;
+
 my $in1 = $ARGV[1];
 my ($b, %h, $name);
 open (IN,"<$in1") || die "can`t open the file $in";
@@ -38,7 +44,7 @@ while(defined($b=<IN>)){
 }
 close IN;
 
-my $output = "selected_sequence.fa.txt";
+my $output = "selected_sequence_90.fa.txt";
 open OUT, ">>$output";
 while(@query){
 	my $selected_name = shift(@query);
