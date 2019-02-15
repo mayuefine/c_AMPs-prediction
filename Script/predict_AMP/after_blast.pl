@@ -2,9 +2,9 @@
 use strict;
 
 =pod
-Usage: perl after_blast.pl one_sample_test.txt pred_amp_sequence_2.txt
-The file named short-test.txt was the file produced by blast-v.sh
-and the q.fa is the file created by after_prediction.pl
+Usage: perl after_blast.pl one_sample_test.txt pred_amp_sequence_2.txt selected_sequence_90.fa.txt
+The file named one_sample_test.txt was the file produced by blast-v.sh
+and the pred_amp_sequence_2.txt is the file created by after_prediction.pl
 =cut
 
 my $in = $ARGV[0];
@@ -44,7 +44,7 @@ while(defined($b=<IN>)){
 }
 close IN;
 
-my $output = "selected_sequence_90.fa.txt";
+my $output = $ARGV[2];
 open OUT, ">>$output";
 while(@query){
 	my $selected_name = shift(@query);
