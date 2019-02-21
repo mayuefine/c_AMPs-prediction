@@ -28,7 +28,7 @@ it = 10
 seed = 30
 random.seed(seed)
 
-# 10 fold cross validation
+# 10 fold cross validation with check point and save best val_acc model
 kfold = StratifiedKFold(n_splits = 20, shuffle = True, random_state = seed)
 
 cvscores = []
@@ -44,12 +44,13 @@ for train, test in kfold.split(x_tr, y_tr):
     model.add(Dense(1, activation = 'sigmoid'))
     model.compile(optimizer = "adam", loss = 'binary_crossentropy', metrics = ['accuracy'])
     print(model.summary())
-    checkpoint = ModelCheckpoint('20f20b.h5', monitor = 'val_acc', verbose = 1, save_best_only = True, mode = 'max')
+    filepath = "20f20b_{epoch:02d}_{val_acc:.2f}.h5"
+    checkpoint = ModelCheckpoint(filepath, monitor = 'val_acc', verbose = 1, save_best_only = True, mode = 'max')
     checkpoint_list = [checkpoint]
     model.fit(x_tr[train], y_tr[train], validation_data = (x_tr[test],y_tr[test]), epochs = it, batch_size = 20, callbacks = checkpoint_list)
     scores = model.evaluate(x_tr[test], y_tr[test],  verbose=0)
 
-    #print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100)) # print ACC
+    
     
     cvscores.append(scores[1] * 100)
 
@@ -75,4 +76,3 @@ print("auROC: %.2f%%"%(roc*100))
 print("ACC_STD: %.2f%% (+/- %.2f%%)" % (mean(cvscores), std(cvscores)))
 print("Precision: %.2f%%"%(Precision*100))
 print("tp: %.1f, fp: %.1f, tn: %.1f, fn: %.1f"%(tp,fp,tn,fn))
-#model.save("20itera20itera20f20b-cf.h5")
