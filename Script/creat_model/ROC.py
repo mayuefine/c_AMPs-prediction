@@ -19,10 +19,10 @@ def cal_rate(pred, lable, thres):
             FP = FP + 1
         elif pred[item][0] < thres[0] and lable[item] == 1:
             FN = FN + 1
-    TPR = float(TP) / float(TP+FN+K.epsilon())
-    TNR = float(TN) / float(FP+TN+K.epsilon())
-    FNR = float(FN) / float(TP+FN+K.epsilon())
-    FPR = float(FP) / float(FP+TN+K.epsilon())
+    TPR = float(TP) / float(TP + FN + K.epsilon())
+    TNR = float(TN) / float(FP + TN + K.epsilon())
+    FNR = float(FN) / float(TP + FN + K.epsilon())
+    FPR = float(FP) / float(FP + TN + K.epsilon())
     return TPR, TNR, FNR, FPR
 
 def roc_rate(pred, lable):
@@ -42,7 +42,7 @@ def roc_rate(pred, lable):
 
     AUC = np.trapz(TPR_array, FPR_array)
     threshold = np.argmin(abs(FNR_array - FPR_array))
-    EER = (FNR_array[threshold]+FPR_array[threshold])/2
+    EER = (FNR_array[threshold] + FPR_array[threshold]) / 2
     plt.plot(FPR_array, TPR_array)
     plt.title('ROC')
     plt.xlabel('False positive rate')
