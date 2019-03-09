@@ -68,15 +68,16 @@ def ap_at_k(number, sorted_list_t):
             pr.append(ij / (j+1))
         if ij >= number:
             break
-    return sum(pr)/number
+    return sum(pr)/number, j
 
 
 set_number = int(input("please input set number of AP@K: "))
 if set_number >= len(y):
     print("The number you seted is bigger than %.0f, which is our total number of this test data, please reset it"%len(y))
     set_number = len(y)
+apk = ap_at_k(set_number, s_l_t)
 
-print("AP@K, K = %.0f: %.2f%%, and the last predition number is %.9f"%(set_number, ap_at_k(set_number, s_l_t)*100, s_l_t[set_number][0][0]))
+print("AP@K, K = %.0f: %.2f%%, and the last predition number is %.9f"%(set_number, apk[0]*100, s_l_t[apk[1]][0][0]))
 print("Accuracy: %.2f%%"%(acc*100))
 print("Sensitivity: %.2f%%"%(sens*100))
 print("Specificity: %.2f%%"%(spec*100))
