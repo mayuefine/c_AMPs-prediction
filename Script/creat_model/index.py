@@ -71,7 +71,7 @@ def ap_at_k(number, sorted_list_t):
     return sum(pr)/number, j
 
 
-set_number = int(input("please input set number of AP@K: "))
+set_number = int(input("Please input the number k for AP@K: "))
 if set_number >= len(y):
     print("The number you seted is bigger than %.0f, which is our total number of this test data, please reset it"%len(y))
     set_number = len(y)
