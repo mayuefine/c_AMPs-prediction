@@ -6,7 +6,7 @@ from Attention import Attention_layer
 from keras import backend as K
 import ROC
 
-model = load_model('20f20b_10_0.9800_16.h5', custom_objects={'Attention_layer': Attention_layer})
+model = load_model('20f20b_09_0.9690_03.h5', custom_objects={'Attention_layer': Attention_layer})
 t = loadtxt("df_amp.txt", delimiter=",")
 f = loadtxt("df_namp.txt", delimiter=",")
 preds_t = model.predict(t).tolist()
@@ -71,16 +71,17 @@ def ap_at_k(number, sorted_list_t):
     return sum(pr)/number, j
 
 
+len_slt = list(s_l_t[x][0][1] == 2 for x in arange(0, len(y))).count(True)
 set_number = int(input("Please input the number K for AP@K: "))
-if set_number >= len(y):
-    print("The number you seted is bigger than %.0f, which is our total number of this test data, please reset it"%len(y))
-    set_number = len(y)
+if set_number >= len_slt:
+    print("The number you seted is bigger than %.0f, which is our total correct number of this test data, please reset it"%len_slt)
+    set_number = len_slt
 apk = ap_at_k(set_number, s_l_t)
 
 print("AP@K, K = %.0f: %.2f%%, and the last predition number is %.9f"%(set_number, apk[0]*100, s_l_t[apk[1]][0][0]))
 print("Accuracy: %.2f%%"%(acc*100))
 print("Sensitivity: %.2f%%"%(sens*100))
 print("Specificity: %.2f%%"%(spec*100))
-print("MCC: %.4f"%(mcc))
+print("MCC: %.4f"% mcc)
 print("auROC: %.2f%%"%(roc*100))
 print("Precision: %.2f%%"%(precision*100))
