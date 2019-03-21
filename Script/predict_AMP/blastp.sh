@@ -6,7 +6,7 @@ blastp -query pred_amp_sequence_2.txt -db all_AMP.fa -out one_sample_test.txt -o
 
 
 # or can try diamond to accelerate alignment process
-diamond makedb --in pred_amp_sequence_2.txt -d reab_test
+diamond makedb --in all_AMP.fa -d reab_test
 diamond blastp -d reab_test -q pred_amp_sequence_2.txt -o test.fa -f 6
 # output file format is blast 6 format, each column head description as below:
 # 1.	 qseqid	 query (e.g., gene) sequence id
