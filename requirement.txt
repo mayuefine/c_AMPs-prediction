@@ -1,0 +1,14 @@
+For BERT Prediction
+bert-sklearn=0.3.1
+numpy=1.18.1
+pandas=1.0.2
+scikit-learn=0.22.1
+tensorflow=1.14.0
+Python=3.6
+-------------------------
+For Attention Prediction
+h5py=2.9.0
+Keras=2.2.4
+numpy=1.16.2
+tensorflow-gpu=1.14.0
+Python=3.6.9
