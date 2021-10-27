@@ -2,18 +2,18 @@
 ---
 
 ## Contents
-__1. Get small orf;__
-__2. Remove same small orfs;__
-__3. AMP prediction;__ 
-__4. Protein potential ;__
-__4.1 Optional section: get selected c_AMPs names ;__
-__5. Network analysis between c_AMPs and bacteria;__
+__1. Get small orf;__<br>
+__2. Remove same small orfs;__<br>
+__3. AMP prediction;__<br>
+__4. Protein potential ;__<br>
+__4.1 Optional section: get selected c_AMPs names ;__<br>
+__5. Network analysis between c_AMPs and bacteria;__<br>
 
 ---
 ## Scripts
 ### 1. Prediction small ORF from genome sequences
   - Here we using perl script to do multiply small ORF predicted.
-    ```perl{.line-numbers}
+    ```perl
        #!/usr/bin/perl -w
        use strict;
        my $in = "fasta_sequence_names";
@@ -29,7 +29,7 @@ __5. Network analysis between c_AMPs and bacteria;__
        close I;
     ```
   - fasta_sequence_names should look like this:
-    ```bash{.line-numbers}
+    ```bash
       head -5 fasta_sequence_names
       family_Acetobacteraceae_otu1.fa
       family_Acetobacteraceae_otu2.fa
@@ -40,11 +40,11 @@ __5. Network analysis between c_AMPs and bacteria;__
 ---
 ### 2. Remove the redundant sORF and known AMPs
   - Merge all orf.fa to one orf fasta file
-    ```bash{.line-numbers}
+    ```bash
        cat *.fa > ../all_orf.fa
     ```
   - Using perl script to remove redundant sORF and known AMPs:
-    ```perl{.line-numbers}
+    ```perl
        #!/usr/bin/perl -w
        use strict;
        my $in = "all_orf.fa";
@@ -89,13 +89,13 @@ __5. Network analysis between c_AMPs and bacteria;__
 ---
 ### 3. AMP prediction parts
   - Prepare three prediction models 
-    ```bash{.line-numbers}
+    ```bash
       Attention model => 10att.h5
       LSTM model => 10lstm.h5
       BERT model => bert.bin
     ```
   - Prepare input data format for LSTM and Attention models
-    ```perl{.line-numbers}
+    ```perl
        #!/usr/bin/perl -w
        use strict;
 
@@ -160,7 +160,7 @@ __5. Network analysis between c_AMPs and bacteria;__
        close I;
     ```
   - Attention Model;
-    ```python{.line-numbers}
+    ```python
        ## usage python3 prediction_10att.py bact.txt 10att_bact.txt
        from keras.models import load_model
        from numpy import loadtxt, savetxt
@@ -174,7 +174,7 @@ __5. Network analysis between c_AMPs and bacteria;__
        savetxt(argv[2], preds, fmt="%.8f", delimiter=",")
     ```
   - Attention_layer from Attention.py;
-    ```python{.line-numbers}
+    ```python
        # -*- coding:utf-8 -*-
        from keras import backend as K
        from keras.engine.topology import Layer
@@ -234,7 +234,7 @@ __5. Network analysis between c_AMPs and bacteria;__
                return (input_shape[0], input_shape[-1])
     ```
   - LSTM Models；
-    ```python{.line-numbers}
+    ```python
       ## usage python3 prediction_10lstm.py bact.txt 10lstm_bact.txt
       from keras.models import load_model
       from numpy import loadtxt, savetxt
@@ -247,7 +247,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       savetxt(argv[2], preds, fmt="%.8f", delimiter=",")
     ```
   - BERT Model;
-    ```python{.line-numbers}
+    ```python
         from os import environ
         from sys import argv
         # usage python prediction_bert.py EUK_PEP_DB_drp.fa EUK.proba.tsv
@@ -270,7 +270,7 @@ __5. Network analysis between c_AMPs and bacteria;__
         pd.DataFrame(y_prob).to_csv(argv[2], sep="\t", header=False, index=False)
      ```
   - Result integration
-     ```perl{.line-numbers}
+     ```perl
         #!/usr/bin/perl -w
         use strict;
         my $att = "10att_bact.txt"; # result from attention model prediction
@@ -359,7 +359,7 @@ __5. Network analysis between c_AMPs and bacteria;__
      ```
   - The number 1 after sequences name means this sequence with AMP activty, 0 means non AMP.
   - Output like this；
-     ```bash{.line-numbers}
+     ```bash
         There are 762218 sequences need to predictive.
         name;size;AMP_prediction(1/0);
         >11U203_Scaf9_1553_[51637_-_51705]_|1
@@ -370,7 +370,7 @@ __5. Network analysis between c_AMPs and bacteria;__
 ---
 ### 4. Candidate AMPs which with protein potential will be selected in this section;
   - Selected length smaller than 50 AA proteom sequences
-    ```perl{.line-numbers}
+    ```perl
       #!/usr/bin/perl -w
       # perl count.pl all_seq.fa > less_50_data.fa
       use strict;
@@ -398,7 +398,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       close I; 
     ```
   - Transformation of c_AMPs sequences into fragments of a certain length, here we setting the length were contain from full length to half length;
-    ```perl{.line-numbers}
+    ```perl
       #!/usr/bin/perl -w
       use strict;
       # usage perl kmer.pl Sequence.fa > mers.fa
@@ -442,11 +442,11 @@ __5. Network analysis between c_AMPs and bacteria;__
     ```
   - Set mers.fa to dictionary data format and every single mers from c_AMPs were setted as dictionary keys, the original c_AMPs were dictionary values.
   - If the mers.fa over 2GB, you shuold split it to small files. Otherwise this script will cause system core dump :/, which will decide by your system memory (RAM) size.
-    ```bash{.line-numbers}
+    ```bash
       split -1000 mers.fa
     ```
   - Key => value format;
-    ```perl{.line-numbers}
+    ```perl
       #!/usr/bin/perl -w
       use strict;
       # usage perl k_mer_dict.pl xaa key_values_01
@@ -482,7 +482,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       }
     ```
   - Selected the c_AMPs that appears in the proteome;
-    ```perl{.line-numbers}
+    ```perl
       #!/usr/bin/perl -w
       use strict;
       # usage perl run.pl key_values_01 proteom_less_50.fa key_values_01.out
@@ -519,7 +519,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       close II;
     ```
   - Merge all *.out file to one file
-    ```bash{.line-numbers}
+    ```bash
       cat *.out > selected_c_AMPs_out.txt
     ```
   - Formatting output sequences
@@ -549,7 +549,7 @@ __5. Network analysis between c_AMPs and bacteria;__
 ---
 ### 4.1 This section were optional
   - Get selected c_AMPs sequences name (the names, if this sORF were get from different genome sequences ) from sORF sequece;
-    ```perl{.line-numbers}
+    ```perl
       #!/usr/bin/perl -w
       use strict;
       # usage perl get_orf_names.pl all_orf.fa selected_c_AMPs.fa > selected_c_AMPs_genome_names.fa
@@ -586,7 +586,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       close II;
     ```
   - Get selected c_AMPs sequences name from proteom sequece; :)
-    ```perl{.line-numbers}
+    ```perl
       #!/usr/bin/perl -w
       use strict;
       # usage perl get_proteom_names.pl selected_c_AMPs_out.txt proteom_less_50.fa > selected_c_AMPs_proteom_names.fa
@@ -624,7 +624,7 @@ __5. Network analysis between c_AMPs and bacteria;__
 ### 5. Network analysis between AMPs and bacteria
   - Befor network analysis, we need caculated relative abundence of c_AMPs;
     - install software;
-    ```bash{.line-numbers}
+    ```bash
       wget https://sourceforge.net/projects/samtools/files/samtools/1.7/samtools-1.7.tar.bz2/download -O samtools-1.7.tar.bz2
       wget https://sourceforge.net/projects/samtools/files/samtools/1.7/htslib-1.7.tar.bz2/download -O htslib-1.7.tar.bz2
       tar jxvf htslib-1.7.tar.bz2
@@ -665,7 +665,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       source /etc/profile
     ```
     - Abundence caculation
-    ```bash{.line-numbers}
+    ```bash
       # Create index
       paladin index -r3 selected_c_AMPs.fa 
 
@@ -678,7 +678,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       samtools idxstats s1.bam >> re_ab.csv
     ```
   - Relative abundence caculation
-    ```R{.line-numbers}
+    ```R
       # integration part
       name <- read.csv("name.csv", header = F) # name.csv contain re_ab.csv for each line
       n <- nrow(name)
@@ -735,7 +735,7 @@ __5. Network analysis between c_AMPs and bacteria;__
       write.csv(cor, "Correlation-spearman-genus_metasub.csv",row.names = T)
     ```
   - Selected c_AMPs at least present to half cohort (here were 7).
-    ```python{.line-numbers}
+    ```python
       #!/usr/bin/python3
 
       from numpy import savetxt, where
@@ -802,13 +802,122 @@ __5. Network analysis between c_AMPs and bacteria;__
       savetxt("Cytoscape_file_AtLeast7nameG.csv", pr_l, fmt = "%s")
     ```
     - Output file "Cytoscape_file_AtLeast7nameG.csv" look like this:
-       |target|soucre|CH01|CH02|CH03|CH04|CH05|CH06|CH07|CH08|CH09|CH10|CH11|CH12|CH13|CH14|CH15|
-       |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-       |c_AMP_258|Actinomyces|atch4|atch1|atch8|atch5|atch15|atch7|atch3|
-       |c_AMP_258|Rothia|atch4|atch2|atch1|atch9|atch12|atch13|atch7|atch3|
-       |c_AMP_259|Staphylococcaceae_unclassified|atch4|atch2|atch1|atch8|atch9|atch6|atch7|
-       |c_AMP_259|Staphylococcus|atch4|atch2|atch1|atch8|atch9|atch6|atch15|atch13|atch7|
-       |c_AMP_259|Clostridiaceae_unclassified|atch4|atch2|atch1|atch9|atch6|atch12|atch7|
+       <table>
+    <tr>
+        <td>target</td>
+        <td>soucre</td>
+        <td>CH01</td>
+        <td>CH02</td>
+        <td>CH03</td>
+        <td>CH04</td>
+        <td>CH05</td>
+        <td>CH06</td>
+        <td>CH07</td>
+        <td>CH08</td>
+        <td>CH09</td>
+        <td>CH10</td>
+        <td>CH11</td>
+        <td>CH12</td>
+        <td>CH13</td>
+        <td>CH14</td>
+        <td>CH15</td>
+    </tr>
+    <tr>
+        <td>c_AMP_258</td>
+        <td>Actinomyces</td>
+        <td>atch4</td>
+        <td>atch1</td>
+        <td>atch8</td>
+        <td>atch5</td>
+        <td>atch15</td>
+        <td>atch7</td>
+        <td>atch3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>c_AMP_258</td>
+        <td>Rothia</td>
+        <td>atch4</td>
+        <td>atch2</td>
+        <td>atch1</td>
+        <td>atch9</td>
+        <td>atch12</td>
+        <td>atch13</td>
+        <td>atch7</td>
+        <td>atch3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>c_AMP_259</td>
+        <td>Staphylococcaceae_unclassified</td>
+        <td>atch4</td>
+        <td>atch2</td>
+        <td>atch1</td>
+        <td>atch8</td>
+        <td>atch9</td>
+        <td>atch6</td>
+        <td>atch7</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>c_AMP_259</td>
+        <td>Staphylococcus</td>
+        <td>atch4</td>
+        <td>atch2</td>
+        <td>atch1</td>
+        <td>atch8</td>
+        <td>atch9</td>
+        <td>atch6</td>
+        <td>atch15</td>
+        <td>atch13</td>
+        <td>atch7</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>c_AMP_259</td>
+        <td>Clostridiaceae_unclassified</td>
+        <td>atch4</td>
+        <td>atch2</td>
+        <td>atch1</td>
+        <td>atch9</td>
+        <td>atch6</td>
+        <td>atch12</td>
+        <td>atch7</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 
 - Selected sequences were synthesis by chemical synthesis, then apply to _in vitro_ activity tests.
 ---
