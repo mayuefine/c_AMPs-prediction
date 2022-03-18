@@ -12,7 +12,7 @@ setup(
                        'boto3',
                        'requests',
                        'regex',
-                       'pytorch_pretrained_bert==0.6.1'
+                       'pytorch_pretrained_bert==0.6.1',
                        'tqdm'],
     python_requires='>=3.5.0',
 )
