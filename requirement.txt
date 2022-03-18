@@ -1,5 +1,5 @@
 For BERT Prediction
-bert-sklearn=0.3.1
+bert-sklearn=0.2.0
 numpy=1.18.1
 pandas=1.0.2
 scikit-learn=0.22.1
