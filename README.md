@@ -5,3 +5,10 @@ __Test set data under 50AA in length, and also the benchmark dataset. [Dataset](
 <br>
 __Verified AMPs have been deposited and published in [ADP database](https://aps.unmc.edu/).__<br>
 __For sequences that have been predicted but not yet verified, please contact Jun Wang(junwang\@im.ac.cn) and request a Material Transfer Agreement (MTA) to ensure proper usage.__<br>
+
+## Installation bert_sklearn
+Download and copy [bert_sklearn](https://github.com/mayuefine/c_AMPs-prediction/tree/master/bert_sklearn) to your python3 site-packages folder.<br>
+```bash
+cd bert-sklearn
+pip install .
+```
