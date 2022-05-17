@@ -22,7 +22,7 @@ __5. Network analysis between c_AMPs and bacteria;__<br>
        while(defined($a=<I>)){
            $a =~ s/\n//igm;
            my $out_name = $a.".orf.fa"; 
-           $cmd = "getorf -sequence /fasta_sequence_path/".$a." -find 1 -table 11 -minsize 15 -maxsize 150 -outseq /output_sequnces_path/".$out_name;
+           $cmd = "getorf -sequence /fasta_sequence_path/".$a." -find 0 -table 11 -minsize 15 -maxsize 150 -outseq /output_sequnces_path/".$out_name;
            system("$cmd");
            #print "$cmd\n"; # print command to screen before real execute
        }
